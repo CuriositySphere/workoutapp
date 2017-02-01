@@ -1,31 +1,19 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-
+var sequelize = require('./db.js');
+var User = sequelize.import('./models/user');
 app.use(require('./middleware/headers'));
 
 
-app.use('/api/test', function(req, res){
-	res.send("Hello World");
-});
+//app.use('/api/test', function(req, res){
+	//res.send("Hello World");
+//});
 
-var Sequelize = require('sequelize');
-var sequelize = new Sequelize('workoutlog', 'postgres', 'Warrior4802', {
-	host: 'localhost',
-	dialect: 'postgres'
-});
 
-sequelize.authenticate().then(
-	function() {
-		console.log('connected to workoutlog postgres db');
-	},
-	function(err){
-		console.log(err);
-	});
-var User = sequelize.define('user', {
-	username:Sequelize.STRING,
-	passwordhash:Sequelize.STRING,
-});
+
+
+
 User.sync();
 
 /**********************DROPS USER TABLE, DANGER***********************
