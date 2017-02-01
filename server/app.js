@@ -27,10 +27,13 @@ var User = sequelize.define('user', {
 	passwordhash:Sequelize.STRING,
 });
 User.sync();
-//User.sync({force:true});
+
+/**********************DROPS USER TABLE, DANGER***********************
+                     User.sync({force:true});
+*****************************************************************/
 app.use(bodyParser.json());
 app.post('/api/user', function(req, res) {
-		var username = req,body,user,username;
+		var username = req.body.user.username;
 		var pass = req.body.user.password;
 User.create({
 			username: 		username,
