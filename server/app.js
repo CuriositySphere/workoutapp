@@ -2,7 +2,8 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var sequelize = require('./db.js');
-var User = sequelize.import('./models/user');
+var User = sequelize.import('./models/user.js');
+
 app.use(require('./middleware/headers'));
 
 
@@ -20,15 +21,15 @@ User.sync();
                      User.sync({force:true});
 *****************************************************************/
 app.use(bodyParser.json());
-app.post('/api/user', function(req, res) {
+/*app.post('/api/user', function(req, res) {
 		var username = req.body.user.username;
 		var pass = req.body.user.password;
 User.create({
 			username: 		username,
-			passwordhash: ""
+			passwordhash: ""  //TO DO: Make it Hashed
 }).then(
 		//Sequelize is going to return the object it created from the db.
-		function createSuccess(user){
+/*		function createSuccess(user){
 				res.json({
 					user: user,
 					message: 'create'
@@ -38,7 +39,8 @@ User.create({
 				res.send(500, err.message)
 		}
 	);
-});
+}); */
+app.use('/api/user' , require('./routes/user'));
 
 
 
