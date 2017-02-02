@@ -43,6 +43,9 @@ User.create({
 app.use('/api/user' , require('./routes/user'));
 
 
+//login route
+app.use('/api/login', require('./routes/session'));
+
 
 app.listen(3000,function(){
 	console.log("app is listening on 3000");
